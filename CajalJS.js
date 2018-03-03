@@ -3,9 +3,19 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
     this.hiddenNodes = numOfHiddenNodes;
     this.outputNodes = numOfOutputNodes;
     this.learningRate = desiredLearningRate;
+
+    
     this.name = function() {return this.firstName + " " + this.lastName;};
 }
 
+var rndArray = new Array(m);
+for (i = 0; i < m; i++) {
+  rndArray[i] = new Array(n);
+  for (j = 0; j < n; j++) {
+    rndArray[i][j] = '[' + i + ', ' + j + ']';
+  }
+}
+console.log(rndArray);
 
 randomNormalDistribution(0, 1, 1000000);
 
@@ -15,11 +25,20 @@ randomNormalDistribution(0, 1, 1000000);
 
 var rndArray = [];
 
-function randomNormalDistribution(mean, stdDeviation, numberOfSamples) {
-	for (x = 0; x < numberOfSamples; x++) {
-		var u = Math.random();
-		var z = -Math.log(1 / u - 1) / 1.702;
-		z = z * stdDeviation + mean;
-		rndArray.push(z);
-	}
+function sampleRandomNormalDistribution(mean, stdDeviation) {
+	var u = Math.random();
+	var z = -Math.log(1 / u - 1) / 1.702;
+    z = z * stdDeviation + mean;
+    return z; 
 }
+
+function randomNormalMatrix(mean, stdDeviation, m, n) {
+    var rndArray = new Array(m);
+    for (i = 0; i < m; i++) {
+      rndArray[i] = new Array(n);
+      for (j = 0; j < n; j++) {
+        rndArray[i][j] = sampleRandomNormalDistribution(mean, stdDeviation);
+      }
+    }
+    return rndArray;
+  }
