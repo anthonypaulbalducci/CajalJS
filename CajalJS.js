@@ -13,6 +13,8 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
 
       final_inputs = math.multiply(this.who, hidden_outputs);
       final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+      
+      output_errors = math.subtract(targets, final_outputs);
 
       hidden_errors = math.multiply(math.transpose(this.who), output_errors);
       this.who = math.add(this.who, this.learningRate * math.multiply((output_errors * final_outputs * (1.0 - final_outputs)), math.transpose(hidden_outputs)));
@@ -27,6 +29,10 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
 
       return final_outputs;
     }
+}
+
+function activationFunction(x) {
+  return 1 / (1 + Math.pow(Math.E, -x));
 }
 
 function sampleRandomNormalDistribution(mean, stdDeviation) {
