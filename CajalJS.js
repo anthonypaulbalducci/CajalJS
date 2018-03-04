@@ -9,9 +9,10 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
 
     this.train = function(inputs_list, targets_list) {
       hidden_inputs = math.multiply(this.wih, inputs);
-      hidden_outputs = 
+      hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+
       final_inputs = math.multiply(this.who, hidden_outputs);
-      final_outputs = 
+      final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
       hidden_errors = math.multiply(math.transpose(this.who), output_errors);
       this.who = math.add(this.who, this.learningRate * math.multiply((output_errors * final_outputs * (1.0 - final_outputs)), math.transpose(hidden_outputs)));
@@ -20,7 +21,9 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
 
     this.query = function(inputs_list) {
       hidden_inputs = math.multiply(this.wih, inputs);
+      hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
       final_inputs = math.multiply(this.who, hidden_outputs);
+      final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
       return final_outputs;
     }
