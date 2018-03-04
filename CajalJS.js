@@ -13,6 +13,9 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
     this.who = randomNormalMatrix(0, Math.pow(numOfHiddenNodes, -0.5), numOfOutputNodes, numOfHiddenNodes);
 
     this.train = function(inputs_list, targets_list) {
+      var inputs = math.transpose(inputs_list);
+      var targets = math.transpose(targets_list);
+      
       var hidden_inputs = math.multiply(this.wih, inputs);
       var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
