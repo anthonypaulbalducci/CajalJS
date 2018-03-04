@@ -8,24 +8,25 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
     this.who = randomNormalMatrix(0, Math.pow(numOfHiddenNodes, -0.5), numOfOutputNodes, numOfHiddenNodes);
 
     this.train = function(inputs_list, targets_list) {
-      hidden_inputs = math.multiply(this.wih, inputs);
-      hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+      var hidden_inputs = math.multiply(this.wih, inputs);
+      var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
-      final_inputs = math.multiply(this.who, hidden_outputs);
-      final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+      var final_inputs = math.multiply(this.who, hidden_outputs);
+      var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
       
-      output_errors = math.subtract(targets, final_outputs);
+      var output_errors = math.subtract(targets, final_outputs);
 
-      hidden_errors = math.multiply(math.transpose(this.who), output_errors);
+      var hidden_errors = math.multiply(math.transpose(this.who), output_errors);
       this.who = math.add(this.who, this.learningRate * math.multiply((output_errors * final_outputs * (1.0 - final_outputs)), math.transpose(hidden_outputs)));
       this.wih = math.add(this.wih, this.learningRate * math.multiply((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), math.transpose(inputs)));
     }
 
     this.query = function(inputs_list) {
-      hidden_inputs = math.multiply(this.wih, inputs);
-      hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      final_inputs = math.multiply(this.who, hidden_outputs);
-      final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+      var inputs = math.transpose(inputs_list);
+      var hidden_inputs = math.multiply(this.wih, inputs);
+      var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+      var final_inputs = math.multiply(this.who, hidden_outputs);
+      var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
       return final_outputs;
     }
