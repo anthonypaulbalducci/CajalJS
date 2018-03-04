@@ -1,3 +1,8 @@
+/* Code inspired by Tariq Rashid's excellent text 'Make Your Own Neural Network'
+   https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G
+   https://github.com/makeyourownneuralnetwork/
+*/
+
 function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearningRate) {
     this.inputNodes = numOfInputNodes;
     this.hiddenNodes = numOfHiddenNodes;
