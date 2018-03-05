@@ -1,6 +1,10 @@
 /* Code inspired by Tariq Rashid's excellent text 'Make Your Own Neural Network'
    https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G
    https://github.com/makeyourownneuralnetwork/
+
+   At present, requires MathJS:
+   http://mathjs.org/
+
 */
 
 function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearningRate) {
@@ -15,25 +19,36 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
     this.train = function(inputs_list, targets_list) {
       var inputs = math.transpose(inputs_list);
       var targets = math.transpose(targets_list);
-      
-      var hidden_inputs = math.multiply(this.wih, inputs);
-      var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
+      var hidden_inputs = math.matrix(math.multiply(this.wih, inputs));
+      console.log(hidden_inputs);
+      var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
+      console.log(hidden_outputs); // map function not working
       var final_inputs = math.multiply(this.who, hidden_outputs);
+      console.log(final_inputs);
       var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      
+      console.log(targets);
+      console.log(final_outputs);
       var output_errors = math.subtract(targets, final_outputs);
 
-      var hidden_errors = math.multiply(math.transpose(this.who), output_errors);
-      this.who = math.add(this.who, this.learningRate * math.multiply((output_errors * final_outputs * (1.0 - final_outputs)), math.transpose(hidden_outputs)));
-      this.wih = math.add(this.wih, this.learningRate * math.multiply((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), math.transpose(inputs)));
+      var hidden_errors = math.matrix(math.multiply(math.transpose(this.who), output_errors));
+      console.log(this.who);
+      this.who = math.matrix(math.add(this.who, this.learningRate * math.multiply((output_errors * final_outputs * (1.0 - final_outputs)), math.transpose(hidden_outputs))));
+      console.log(this.who);
+      this.wih = math.matrix(math.add(this.wih, this.learningRate * math.multiply((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), math.transpose(inputs))));
     }
 
     this.query = function(inputs_list) {
       var inputs = math.transpose(inputs_list);
-      var hidden_inputs = math.multiply(this.wih, inputs);
+      
+      console.log(inputs);
+      console.log(this.wih);
+      var hidden_inputs = math.matrix(math.multiply(this.wih, inputs));
+      console.log(hidden_inputs);
       var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      var final_inputs = math.multiply(this.who, hidden_outputs);
+      console.log(hidden_outputs);
+      var final_inputs = math.matrix(math.multiply(this.who, hidden_outputs));
+      console.log(final_inputs);
       var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
       return final_outputs;
