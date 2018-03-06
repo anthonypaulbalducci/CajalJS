@@ -21,14 +21,13 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
       var targets = math.transpose(targets_list);
 
       var hidden_inputs = math.matrix(math.multiply(this.wih, inputs));
-      console.log(hidden_inputs);
+      
       var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      console.log(hidden_outputs); // map function not working
+      
       var final_inputs = math.multiply(this.who, hidden_outputs);
-      console.log(final_inputs);
+      
       var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      console.log(targets);
-      console.log(final_outputs);
+      
       var output_errors = math.subtract(targets, final_outputs);
 
       var hidden_errors = math.matrix(math.multiply(math.transpose(this.who), output_errors));
