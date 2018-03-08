@@ -19,36 +19,23 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
     this.train = function(inputs_list, targets_list) {
       var inputs = math.transpose(inputs_list);
       var targets = math.transpose(targets_list);
-
       var hidden_inputs = math.matrix(math.multiply(this.wih, inputs));
-      
       var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      
       var final_inputs = math.multiply(this.who, hidden_outputs);
-      
       var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      
       var output_errors = math.subtract(targets, final_outputs);
-
       var hidden_errors = math.matrix(math.multiply(math.transpose(this.who), output_errors));
      
       this.who = math.add(this.who, math.dotMultiply(this.learningRate, math.multiply(math.dotMultiply(output_errors, math.dotMultiply(final_outputs, (math.subtract(1.0, final_outputs)))), math.transpose(hidden_outputs))));
-      
       this.wih = math.add(this.wih, math.dotMultiply(this.learningRate, math.multiply(math.dotMultiply(hidden_errors, math.dotMultiply(hidden_outputs, (math.subtract(1.0, hidden_outputs)))), math.transpose(inputs))));
       
     }
 
     this.query = function(inputs_list) {
       var inputs = math.transpose(inputs_list);
-      
-      console.log(inputs);
-      console.log(this.wih);
       var hidden_inputs = math.matrix(math.multiply(this.wih, inputs));
-      console.log(hidden_inputs);
       var hidden_outputs = hidden_inputs.map(function (value, index, matrix) { return activationFunction(value); });
-      console.log(hidden_outputs);
       var final_inputs = math.matrix(math.multiply(this.who, hidden_outputs));
-      console.log(final_inputs);
       var final_outputs = final_inputs.map(function (value, index, matrix) { return activationFunction(value); });
 
       return final_outputs;
