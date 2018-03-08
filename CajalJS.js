@@ -31,10 +31,11 @@ function cNet(numOfInputNodes, numOfHiddenNodes, numOfOutputNodes, desiredLearni
       var output_errors = math.subtract(targets, final_outputs);
 
       var hidden_errors = math.matrix(math.multiply(math.transpose(this.who), output_errors));
-      console.log(this.who);
-      this.who = math.matrix(math.add(this.who, this.learningRate * math.multiply((output_errors * final_outputs * (1.0 - final_outputs)), math.transpose(hidden_outputs))));
-      console.log(this.who);
-      this.wih = math.matrix(math.add(this.wih, this.learningRate * math.multiply((hidden_errors * hidden_outputs * (1.0 - hidden_outputs)), math.transpose(inputs))));
+     
+      this.who = math.add(this.who, math.dotMultiply(this.learningRate, math.multiply(math.dotMultiply(output_errors, math.dotMultiply(final_outputs, (math.subtract(1.0, final_outputs)))), math.transpose(hidden_outputs))));
+      
+      this.wih = math.add(this.wih, math.dotMultiply(this.learningRate, math.multiply(math.dotMultiply(hidden_errors, math.dotMultiply(hidden_outputs, (math.subtract(1.0, hidden_outputs)))), math.transpose(inputs))));
+      
     }
 
     this.query = function(inputs_list) {
