@@ -1,42 +1,66 @@
 <!DOCTYPE html>
-<html lang="en" >
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+  crossorigin="anonymous"></script>  
+<script src="js/index.js"></script>
+<html lang="en">
 
 <head>
   <meta charset="UTF-8">
-  <title>A Pen by  Anthony</title>
-  
-  
-  
-      <link rel="stylesheet" href="css/style.css">
+  <title>CajalJS</title>
 
-  
+
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/style.css">
+
+
 </head>
 
 <body>
 
-  <script type="text/javascript" src="static/js/read-csv.js"></script>
-<p>Training Set</p>
-<p><input type="file" id="csvFileInput" onchange="handleFiles(this.files)"
-          accept=".csv"></p>
+  <div class="container">
+    <div class="row">
+      <div class="col">        <p>Training Set</p>
+        <p>
+          <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">
+        </p>
 
-<div class="l">
-<div class="rowsDetected">Rows Detected:</div>
-<div class="columnsDetected">Columns Detected:</div>
-<div class="targetsColumn">Targets in Column:</div>
-<div class="dataTransform">Data Transform:
-      <p><input type="radio" id="contactChoice2"
-     name="dTransform" value="none">
-    <label for="contactChoice2">None</label>
-      <input type="radio" id="contactChoice2"
-     name="contact" value="custom">
-    <label for="contactChoice2">Custom</label>
-  </div>
-</div>
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js'></script>
+        <div class="kk">
+          <p>
+            <div class="rowsDetected">Rows Detected:</div>
+          </p>
+          <p>
+            <div class="columnsDetected">Columns Detected:</div>
+          </p>
+          <p>
+            <div class="targetsColumn">Targets in Column:</div>
+          </p>
+          <p>
+            <div class="dataTransform">Data Transform:</p>
+          <p>
+            <input type="radio" id="contactChoice2" name="dTransform" value="none" onclick="$(custom).prop('disabled', true);">
+            <label for="contactChoice2">None</label>
+            <input type="radio" id="contactChoice2" name="dTransform" value="custom" onclick="$(custom).prop('disabled', false);">
+            <label for="contactChoice2">Custom</label>
+            <input type="text" id="custom" name="custom" value="" align="right" disabled>
+            <p>
+              <input id="checkBox" type="checkbox"> Display Image</p>
+            <p>
+              <div class="xPixels">X Pixels:</div>
+            </p>
+            <p>
+              <div class="yPixels">Y Pixels:</div>
 
-  
+            </p>
+            <p><button type="button" onclick="alert('Hello world!')">Train</button></p>
+            </div>
+        </div></div>
 
-    <script  src="js/index.js"></script>
+        <div class="col">Hi</div>
+        <div class="col">Hi</div>
+      </div>
+    </div>
 
 
 
