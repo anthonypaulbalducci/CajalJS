@@ -44,8 +44,10 @@ console.log(lines[0].length);
       $(".rowsDetected").append(" " + dataRows + " <input type='text' name='FirstName' value='" + dataRows + "'>");
       $(".columnsDetected").append(" " + lines[0].length + " <input type='text' name='FirstName' value='" + lines[0].length + "'>");
       $(".targetsColumn").append(" <input type='text' name='FirstName' value='1'>");
+      $(".xPixels").append(" <input type='text' name='FirstName' value='1'>");
+      $(".yPixels").append(" <input type='text' name='FirstName' value='1'>");
     }
-
+    
     function errorHandler(evt) {
       if(evt.target.error.name == "NotReadableError") {
           alert("Cannot read file !");
