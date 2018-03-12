@@ -41,15 +41,24 @@ console.log(lines[0].length);
       dataRows = Number(lines.length);
       if (lines[lines.length - 1].length < lines[0].length) dataRows--;
       console.log(dataRows);
-      $(".rowsDetected").append(" " + dataRows + " <input type='text' name='FirstName' value='" + dataRows + "'>");
-      $(".columnsDetected").append(" " + lines[0].length + " <input type='text' name='FirstName' value='" + lines[0].length + "'>");
-      $(".targetsColumn").append(" <input type='text' name='FirstName' value='1'>");
-      $(".xPixels").append(" <input type='text' name='FirstName' value='1'>");
-      $(".yPixels").append(" <input type='text' name='FirstName' value='1'>");
+      $(".rowsDetected").append(" " + dataRows + " <input type='text' name='FirstName' value='" + dataRows + "'>").hide().fadeIn(1000);
+      $(".columnsDetected").append(" " + lines[0].length + " <input type='text' name='FirstName' value='" + lines[0].length + "'>").hide().fadeIn(1000);
+      $(".targetsColumn").append(" <input type='text' name='targetsCol' value='1'>").hide().fadeIn(1000);
+      $(".xPixels").append(" <input type='text' name='xPix' value='" + Math.sqrt(lines[0].length - 1) + "'>").hide().fadeIn(1000);
+      $(".yPixels").append(" <input type='text' name='yPix' value='" + Math.sqrt(lines[0].length - 1) + "'>").hide().fadeIn(1000);
+      $(".train").prop('disabled', false);
     }
     
     function errorHandler(evt) {
       if(evt.target.error.name == "NotReadableError") {
           alert("Cannot read file !");
       }
+    }
+
+    function train() {
+        //$(".dataPreview").append("<canvas id='myCanvas' width='" + (Math.sqrt(lines[0].length - 1)) * 4 + "' height='100' style='border:1px solid #000000;'></canvas>");
+        $(".dataPreview").append("<p><div class='trainingInProgress'>Training...</div></p>")
+        $(".dataPreview").append("<canvas id='myCanvas' width='" + (28 * 4) + "' height='" + (28 * 4) + "' style='border:1px solid #000000;'></canvas>");
+        $(".dataPreview").append("<p>Element X of Y</p>")
+        setInterval(function(){ $(".trainingInProgress").fadeTo(900, 0).fadeTo(900, 1); }, 1000);
     }

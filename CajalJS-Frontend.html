@@ -21,6 +21,7 @@
 
   <div class="container">
     <div class="row">
+      <div class="col dataPreview"></div>
       <div class="col">        <p>Training Set</p>
         <p>
           <input type="file" id="csvFileInput" onchange="handleFiles(this.files)" accept=".csv">
@@ -39,7 +40,7 @@
           <p>
             <div class="dataTransform">Data Transform:</p>
           <p>
-            <input type="radio" id="contactChoice2" name="dTransform" value="none" onclick="$(custom).prop('disabled', true);">
+            <input type="radio" id="contactChoice2" name="dTransform" value="none" onclick="$(custom).prop('disabled', true);" checked="checked">
             <label for="contactChoice2">None</label>
             <input type="radio" id="contactChoice2" name="dTransform" value="custom" onclick="$(custom).prop('disabled', false);">
             <label for="contactChoice2">Custom</label>
@@ -53,7 +54,7 @@
               <div class="yPixels">Y Pixels:</div>
 
             </p>
-            <p><button type="button" onclick="alert('Hello world!')">Train</button></p>
+            <p><button type="button" class="train" onclick="train()" disabled>Train</button></p>
             </div>
         </div></div>
 
