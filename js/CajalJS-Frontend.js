@@ -36,7 +36,7 @@
                 }
                 lines.push(tarr);
         }
-    var test = dataObj(lines);
+
 console.log(lines);
 console.log(lines[0].length);
       dataRows = Number(lines.length);
@@ -46,8 +46,18 @@ console.log(lines[0].length);
       $(".columnsDetected").append(" " + lines[0].length + " <input type='text' name='FirstName' value='" + lines[0].length + "'>").hide().fadeIn(1000);
       $(".targetsColumn").append(" <input type='text' name='targetsCol' value='1'>").hide().fadeIn(1000);
       $(".xPixels").append(" <input type='text' name='xPix' class='xPix' value='" + Math.sqrt(lines[0].length - 1) + "' disabled>").hide().fadeIn(1000);
-      $(".yPixels").append(" <input type='text' name='yPix' value='" + Math.sqrt(lines[0].length - 1) + "' disabled>").hide().fadeIn(1000);
+      $(".yPixels").append(" <input type='text' name='yPix' class='yPix' value='" + Math.sqrt(lines[0].length - 1) + "' disabled>").hide().fadeIn(1000);
       $(".train").prop('disabled', false);
+      $('#checkBox').change(function() {
+        if ($('#checkBox').is(':checked') == true){
+          $('.xPix').prop('disabled', false);
+          $('.yPix').prop('disabled', false);
+       } else {
+         $('.xPix').prop('disabled', true);
+         $('.yPix').prop('disabled', true);
+       }
+    
+    });
     }
     
     function errorHandler(evt) {
@@ -56,9 +66,6 @@ console.log(lines[0].length);
       }
     }
 
-    function dataObj(data) {
-        this.data = data;
-    }
 
     function train() {
         //$(".dataPreview").append("<canvas id='myCanvas' width='" + (Math.sqrt(lines[0].length - 1)) * 4 + "' height='100' style='border:1px solid #000000;'></canvas>");
