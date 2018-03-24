@@ -75,9 +75,25 @@ console.log(lines[0].length);
         $(".dataPreview").append("<p><button type='button' class='cancel' onclick='train()'>Cancel</button></p>");
         $(".train").prop('disabled', true);
         $("#csvFileInput").prop('disabled', true);
+        transformData($("#dTransform").val());
         setInterval(function(){ $(".trainingInProgress").fadeTo(900, 0).fadeTo(900, 1); }, 1000);
         console.log(test.data);
     }
+
+    function transformData(transform) {
+        if ($("#dTransform").val() == "") {
+          transform = "X";
+        }
+        const compiled = math.compile(transform);
+        const mapFunction = function(X) {
+          const scope = { X: X };
+          return compiled.eval(scope);
+        };
+        const result = math.map(Y, mapFunction); 
+        console.log(result);
+        return result;
+      }
+      
 
     
 
